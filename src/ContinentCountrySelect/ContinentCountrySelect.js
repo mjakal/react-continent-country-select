@@ -137,7 +137,7 @@ class ContinentCountrySelect extends React.Component {
         if (index === continentsCount && !allCountries) {
           return (
             <Card className="mb-2">
-              <CardHeader className="collapse-header">
+              <CardHeader className="rccs-component-collapse-header">
                 No countries found.
               </CardHeader>
             </Card>
@@ -149,7 +149,7 @@ class ContinentCountrySelect extends React.Component {
 
         return (
           <Card key={continent.code} className="mb-2">
-            <CardHeader className="collapse-header">
+            <CardHeader className="rccs-component-collapse-header">
               <div className="title">
                 <Input
                   type="checkbox"
@@ -184,7 +184,7 @@ class ContinentCountrySelect extends React.Component {
             </CardHeader>
             <Collapse isOpen={activeItems[continent.code]}>
               <CardBody>
-                <div className="countries-container">
+                <div className="rccs-component-countries-container">
                   {filtered.map(country => {
                     const isChecked = !!selected[country.code];
                     const name = country.code;
