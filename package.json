@@ -1,0 +1,80 @@
+{
+  "name": "react-continent-country-select",
+  "version": "0.0.1",
+  "description": "React Bootstrap Continent Country Select",
+  "main": "./dist/index.js",
+  "author": {
+    "name": "Martin Jakal",
+    "email": "mjakal@gmail.com",
+    "url": "https://github.com/mjakal/"
+  },
+  "contributors": [
+    "paulao47 (https://github.com/paulao47)"
+  ],
+  "keywords": [
+    "react",
+    "bootstrap",
+    "continent",
+    "country",
+    "select",
+    "react-component"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mjakal/react-continent-country-select"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --config webpack.config.babel.js",
+    "build-examples": "webpack --config examples/webpack.config.babel.js --progress",
+    "clean": "rm -rf dist coverage",
+    "coverage": "jest --coverage",
+    "lint": "eslint ./src",
+    "start": "webpack-dev-server --config examples/webpack.config.live.babel.js",
+    "test": "npm run lint && npm run coverage"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "@babel/register": "^7.9.0",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^25.4.0",
+    "babel-loader": "^8.1.0",
+    "bootstrap": "^4.4.1",
+    "chai": "^4.2.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.5.3",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.19.0",
+    "file-loader": "^6.0.0",
+    "jest-cli": "^25.4.0",
+    "node-sass": "^4.14.0",
+    "prop-types": "^15.7.2",
+    "react": "16.8.6",
+    "react-addons-test-utils": "^15.6.2",
+    "react-dom": "16.8.6",
+    "react-hot-loader": "next",
+    "react-test-renderer": "^16.13.1",
+    "regenerator-runtime": "^0.13.5",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "peerDependencies": {
+    "bootstrap": ">= 4.0.0",
+    "react": ">= 16.8.6",
+    "react-dom": ">= 16.8.6"
+  },
+  "dependencies": {
+    "font-awesome": "^4.7.0",
+    "reactstrap": "^8.4.1"
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0"
+  }
+}
