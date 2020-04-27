@@ -6,6 +6,11 @@ import ContinentCountrySelect from "../src";
 import { tasks } from './sampleData';
 
 const Example = () => {
+  const selectedCountries = {BE: true, NL: true, HR: true };
+  const onChange = selected => {
+    console.log("selected countries", selected)
+  }
+
   return (
     <div className="container">
       <Card>
@@ -15,7 +20,10 @@ const Example = () => {
           </span>
         </CardHeader>
         <CardBody>
-          <ContinentCountrySelect />
+          <ContinentCountrySelect 
+            selected={selectedCountries}
+            onChange={onChange}
+          />
         </CardBody>
       </Card>
     </div>
