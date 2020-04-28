@@ -1,6 +1,6 @@
 # react-continent-country-select
 
-> React Bootstrap Continent Country Select
+![React Continent Country Select Screenshot](https://i.ibb.co/FmKrGMJ/react-continent-country-select.png)
 
 [![NPM](https://img.shields.io/npm/v/react-continent-country-select.svg)](https://www.npmjs.com/package/react-continent-country-select) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -13,16 +13,25 @@ npm install --save react-continent-country-select
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React, { useState } from 'react';
+import ContinentCountrySelect from 'react-continent-country-select';
+import 'react-continent-country-select/dist/index.css';
 
-import MyComponent from 'react-continent-country-select'
-import 'react-continent-country-select/dist/index.css'
+const App = () => {
+  const [selectedCountries, setSelectedCountries] = useState({
+    BE: true,
+    NL: true,
+    HR: true
+  });
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
-}
+  const onChange = selected => setSelectedCountries({ ...selected });
+
+  return (
+    <ContinentCountrySelect selected={selectedCountries} onChange={onChange} />
+  );
+};
+
+export default App;
 ```
 
 ## License
