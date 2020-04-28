@@ -4,7 +4,7 @@
   "description": "React Bootstrap Continent Country Select",
   "author": "mjakal",
   "license": "MIT",
-  "repository": "mjakal/react-continent-country-select",
+  "repository": "https://github.com/mjakal/react-continent-country-select",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
@@ -24,7 +24,10 @@
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "bootstrap": ">= 4.0.0",
+    "react": ">= 16.8.0",
+    "react-dom": ">= 16.8.0",
+    "reactstrap": ">= 8.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",

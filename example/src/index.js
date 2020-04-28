@@ -1,5 +1,6 @@
 import 'bootstrap/scss/bootstrap.scss';
 import 'font-awesome/css/font-awesome.min.css';
+import 'flag-icon-css/css/flag-icon.min.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
