@@ -4,6 +4,8 @@
 
 [![NPM](https://img.shields.io/npm/v/react-continent-country-select.svg)](https://www.npmjs.com/package/react-continent-country-select) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+**LIVE DEMO:** [https://mjakal.github.io/react-continent-country-select/](https://mjakal.github.io/react-continent-country-select/)
+
 ## Install
 
 ```bash
