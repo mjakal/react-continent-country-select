@@ -1,15 +1,13 @@
 import React from 'react';
-import 'bootstrap/scss/bootstrap.scss';
-import 'font-awesome/css/font-awesome.min.css';
 import { Card, CardHeader, CardBody } from 'reactstrap';
-import ContinentCountrySelect from "../src";
-import { tasks } from './sampleData';
+import ContinentCountrySelect from 'react-continent-country-select';
+import 'react-continent-country-select/dist/index.css';
 
-const Example = () => {
-  const selectedCountries = {BE: true, NL: true, HR: true };
+const App = () => {
+  const selectedCountries = { BE: true, NL: true, HR: true };
   const onChange = selected => {
-    console.log("selected countries", selected)
-  }
+    console.log('selected countries', selected);
+  };
 
   return (
     <div className="container">
@@ -20,7 +18,7 @@ const Example = () => {
           </span>
         </CardHeader>
         <CardBody>
-          <ContinentCountrySelect 
+          <ContinentCountrySelect
             selected={selectedCountries}
             onChange={onChange}
           />
@@ -30,5 +28,4 @@ const Example = () => {
   );
 };
 
-
-export default Example;
+export default App;

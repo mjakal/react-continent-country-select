@@ -1,81 +1,58 @@
 {
   "name": "react-continent-country-select",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "React Bootstrap Continent Country Select",
-  "main": "./dist/index.js",
-  "author": {
-    "name": "Martin Jakal",
-    "email": "mjakal@gmail.com",
-    "url": "https://github.com/mjakal/"
-  },
-  "contributors": [
-    "paulao47 (https://github.com/paulao47)"
-  ],
-  "keywords": [
-    "react",
-    "bootstrap",
-    "continent",
-    "country",
-    "select",
-    "react-component"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mjakal/react-continent-country-select"
-  },
+  "author": "mjakal",
   "license": "MIT",
-  "scripts": {
-    "build": "webpack --config webpack.config.babel.js",
-    "build-examples": "webpack --config examples/webpack.config.babel.js --progress",
-    "clean": "rm -rf dist coverage",
-    "coverage": "jest --coverage",
-    "lint": "eslint ./src",
-    "prepublish": "npm run test && npm run build",
-    "start": "webpack-dev-server --config examples/webpack.config.live.babel.js",
-    "test": "npm run lint && npm run coverage"
+  "repository": "mjakal/react-continent-country-select",
+  "main": "dist/index.js",
+  "module": "dist/index.modern.js",
+  "source": "src/index.js",
+  "engines": {
+    "node": ">=10"
   },
-  "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.5",
-    "@babel/preset-react": "^7.9.4",
-    "@babel/register": "^7.9.0",
-    "babel-eslint": "^10.1.0",
-    "babel-jest": "^25.4.0",
-    "babel-loader": "^8.1.0",
-    "bootstrap": "^4.4.1",
-    "chai": "^4.2.0",
-    "clean-webpack-plugin": "^3.0.0",
-    "css-loader": "^3.5.3",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
-    "eslint": "^6.8.0",
-    "eslint-plugin-react": "^7.19.0",
-    "file-loader": "^6.0.0",
-    "jest-cli": "^25.4.0",
-    "node-sass": "^4.14.0",
-    "prop-types": "^15.7.2",
-    "react": "16.8.6",
-    "react-addons-test-utils": "^15.6.2",
-    "react-dom": "16.8.6",
-    "react-hot-loader": "next",
-    "react-test-renderer": "^16.13.1",
-    "regenerator-runtime": "^0.13.5",
-    "sass-loader": "^8.0.2",
-    "style-loader": "^1.2.0",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+  "scripts": {
+    "build": "microbundle-crl --no-compress --format modern,cjs",
+    "start": "microbundle-crl watch --no-compress --format modern,cjs",
+    "prepublish": "run-s build",
+    "test": "run-s test:unit test:lint test:build",
+    "test:build": "run-s build",
+    "test:lint": "eslint .",
+    "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
+    "test:watch": "react-scripts test --env=jsdom",
+    "predeploy": "cd example && npm install && npm run build",
+    "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
-    "bootstrap": ">= 4.0.0",
-    "react": ">= 16.8.6",
-    "react-dom": ">= 16.8.6"
+    "react": "^16.0.0"
   },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "cross-env": "^7.0.2",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-config-standard-react": "^9.2.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "gh-pages": "^2.2.0",
+    "microbundle-crl": "^0.13.8",
+    "node-sass": "^4.13.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.19.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "^3.4.1"
+  },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
-    "font-awesome": "^4.7.0",
+    "bootstrap": "^4.4.1",
     "reactstrap": "^8.4.1"
-  },
-  "resolutions": {
-    "babel-core": "7.0.0-bridge.0"
   }
 }
