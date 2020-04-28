@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "file:../node_modules/bootstrap",
+    "flag-icon-css": "^3.4.6",
     "font-awesome": "^4.7.0",
     "react": "file:../node_modules/react",
     "react-continent-country-select": "file:..",
