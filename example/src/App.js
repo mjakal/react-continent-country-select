@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import ContinentCountrySelect from 'react-continent-country-select';
+import continents from 'react-continent-country-select/dist/continent_countries.json';
 import 'react-continent-country-select/dist/index.css';
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
         </CardHeader>
         <CardBody>
           <ContinentCountrySelect
+            continents={continents}
             selected={selectedCountries}
             onChange={onChange}
           />

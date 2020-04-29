@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormGroup, InputGroup, Input } from 'reactstrap';
 import styles from './styles.module.css';
-import continents from './continent_countries.json';
+// import continents from '../public/continent_countries.json';
 import ContinentCountries from './ContinentCountries';
 
 const propTypes = {
+  continents: PropTypes.array.isRequired,
   selected: PropTypes.object,
   onChange: PropTypes.func.isRequired
 };
@@ -15,7 +16,7 @@ const defaultProps = {
 };
 
 const ContinentCountrySelect = props => {
-  const { selected, onChange } = props;
+  const { continents, selected, onChange } = props;
   const [query, setQueryState] = useState('');
   const [activeItems, setActiveItemState] = useState({
     AF: false,

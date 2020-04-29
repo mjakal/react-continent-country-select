@@ -6,7 +6,8 @@ node_modules
 
 # builds
 build
-dist
+dist/*
+!dist/continent_countries.json
 .rpt2_cache
 
 # misc
