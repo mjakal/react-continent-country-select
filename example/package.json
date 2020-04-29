@@ -5,8 +5,8 @@
   "private": true,
   "dependencies": {
     "bootstrap": "file:../node_modules/bootstrap",
-    "flag-icon-css": "^3.4.6",
-    "font-awesome": "^4.7.0",
+    "font-awesome": "file:../node_modules/font-awesome",
+    "flag-icon-css": "file:../node_modules/flag-icon-css",
     "react": "file:../node_modules/react",
     "react-continent-country-select": "file:..",
     "react-dom": "file:../node_modules/react-dom",
