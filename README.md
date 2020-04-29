@@ -6,6 +6,13 @@
 
 **LIVE DEMO:** [https://mjakal.github.io/react-continent-country-select/](https://mjakal.github.io/react-continent-country-select/)
 
+## Requirements
+
+- bootstrap ">= 4.0.0
+- react >= 16.8.0
+- react-dom >= 16.8.0
+- reactstrap >= 8.0.0
+
 ## Install
 
 ```bash
