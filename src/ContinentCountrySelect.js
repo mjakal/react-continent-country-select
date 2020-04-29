@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormGroup, InputGroup, Input } from 'reactstrap';
 import styles from './styles.module.css';
-// import continents from '../public/continent_countries.json';
 import ContinentCountries from './ContinentCountries';
 
 const propTypes = {

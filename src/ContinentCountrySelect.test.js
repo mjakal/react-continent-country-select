@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ContinentCountrySelect from './index';
+import continents from '../dist/continent_countries.json';
 
 describe('ReactAsyncTable', () => {
   it('renders without crashing', () => {
@@ -11,6 +12,7 @@ describe('ReactAsyncTable', () => {
 
     const wrapper = shallow(
       <ContinentCountrySelect
+        continents={continents}
         selected={selectedCountries}
         onChange={onChange}
       />

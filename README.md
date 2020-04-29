@@ -18,6 +18,7 @@ npm install --save react-continent-country-select
 import React, { useState } from 'react';
 import ContinentCountrySelect from 'react-continent-country-select';
 import 'react-continent-country-select/dist/index.css';
+import continents from 'react-continent-country-select/dist/continent_countries.json';
 
 const App = () => {
   const [selectedCountries, setSelectedCountries] = useState({
@@ -29,7 +30,11 @@ const App = () => {
   const onChange = selected => setSelectedCountries({ ...selected });
 
   return (
-    <ContinentCountrySelect selected={selectedCountries} onChange={onChange} />
+    <ContinentCountrySelect
+      continents={continents}
+      selected={selectedCountries}
+      onChange={onChange}
+    />
   );
 };
 
