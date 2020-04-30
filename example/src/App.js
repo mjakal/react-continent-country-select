@@ -1,17 +1,32 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardBody } from 'reactstrap';
-import ContinentCountrySelect from 'react-continent-country-select';
+import { Card, CardHeader, CardBody, CardFooter, Button } from 'reactstrap';
+import {
+  ContinentCountrySelect,
+  deserializeCountries,
+  serializeCountries
+} from 'react-continent-country-select';
 import continents from 'react-continent-country-select/dist/continent_countries.json';
 import 'react-continent-country-select/dist/index.css';
 
+// pre-selected values from e.g. API endpoint
+const countries = ['be', 'nl', 'hr'];
+// Deserialize data: convert ['be', 'nl', 'hr'] to { BE: true, NL: true, HR: true }
+const deserializedCountries = deserializeCountries(countries);
+
 const App = () => {
   const [selectedCountries, setSelectedCountries] = useState({
-    BE: true,
-    NL: true,
-    HR: true
+    ...deserializedCountries
   });
 
   const onChange = selected => setSelectedCountries({ ...selected });
+
+  const onSerializeData = () => {
+    // Serialize selected countries
+    // The second Boolean param serializes data to (upper/lower case)  depending on your specific needs
+    const serializedCountries = serializeCountries(selectedCountries, false);
+
+    alert(`Selected Countries: \n ${JSON.stringify(serializedCountries)}`);
+  };
 
   return (
     <div className="container">
@@ -28,6 +43,11 @@ const App = () => {
             onChange={onChange}
           />
         </CardBody>
+        <CardFooter>
+          <Button color="primary" size="lg" block onClick={onSerializeData}>
+            Serialize Data
+          </Button>
+        </CardFooter>
       </Card>
     </div>
   );

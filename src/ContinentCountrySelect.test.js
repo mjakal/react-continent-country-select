@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ContinentCountrySelect from './index';
+import { ContinentCountrySelect } from './index';
 import continents from '../dist/continent_countries.json';
 
 describe('ReactAsyncTable', () => {

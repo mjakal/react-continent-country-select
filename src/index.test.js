@@ -1,4 +1,4 @@
-import ContinentCountrySelect from '.';
+import { ContinentCountrySelect } from '.';
 
 describe('ContinentCountrySelect', () => {
   it('is truthy', () => {
