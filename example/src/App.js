@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardBody, CardFooter, Button } from 'reactstrap';
 import {
   ContinentCountrySelect,
@@ -10,19 +10,22 @@ import 'react-continent-country-select/dist/index.css';
 
 // pre-selected values from e.g. API endpoint
 const countries = ['be', 'nl', 'hr'];
-// Deserialize data: convert ['be', 'nl', 'hr'] to { BE: true, NL: true, HR: true }
-const deserializedCountries = deserializeCountries(countries);
 
 const App = () => {
-  const [selectedCountries, setSelectedCountries] = useState({
-    ...deserializedCountries
-  });
+  const [selectedCountries, setSelectedCountries] = useState({});
+
+  useEffect(() => {
+    // Deserialize data: convert ['be', 'nl', 'hr'] to { BE: true, NL: true, HR: true }
+    const deserializedCountries = deserializeCountries(countries);
+
+    setSelectedCountries({ ...deserializedCountries });
+  }, []);
 
   const onChange = selected => setSelectedCountries({ ...selected });
 
   const onSerializeData = () => {
     // Serialize selected countries
-    // The second Boolean param serializes data to (upper/lower case)  depending on your specific needs
+    // The second boolean param is used for serializing data depending on your specific needs (upper/lower case)
     const serializedCountries = serializeCountries(selectedCountries, false);
 
     alert(`Selected Countries: \n ${JSON.stringify(serializedCountries)}`);
