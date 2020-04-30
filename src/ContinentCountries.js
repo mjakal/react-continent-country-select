@@ -107,48 +107,50 @@ const ContinentCountries = props => {
         <Collapse isOpen={activeItems[continent.code]}>
           <CardBody>
             <div className={styles.countries_container}>
-              {filtered.map(country => {
-                const isChecked = !!selected[country.code];
-                const name = country.code;
-                const label = `${country.name} (+${country.dial_code})`;
-                const flag = country.code.toLowerCase();
+              <div className={styles.block}>
+                {filtered.map(country => {
+                  const isChecked = !!selected[country.code];
+                  const name = country.code;
+                  const label = `${country.name} (+${country.dial_code})`;
+                  const flag = country.code.toLowerCase();
 
-                return (
-                  <FormGroup key={country.code} check className="checkbox">
-                    <Input
-                      type="checkbox"
-                      className="form-check-input"
-                      style={cursorStyle}
-                      name={name}
-                      value={isChecked}
-                      onChange={onSelect}
-                      checked={isChecked}
-                    />
-                    <Label
-                      check
-                      className="form-check-label"
-                      style={cursorStyle}
-                      onClick={() => {
-                        const event = {
-                          target: {
-                            type: 'checkbox',
-                            name: name,
-                            checked: !isChecked
-                          }
-                        };
-
-                        onSelect(event);
-                      }}
-                    >
-                      <i
-                        style={{ width: '30px' }}
-                        className={`flag-icon flag-icon-${flag} mr-1`}
+                  return (
+                    <FormGroup key={country.code} check className="checkbox">
+                      <Input
+                        type="checkbox"
+                        className="form-check-input"
+                        style={cursorStyle}
+                        name={name}
+                        value={isChecked}
+                        onChange={onSelect}
+                        checked={isChecked}
                       />
-                      {label}
-                    </Label>
-                  </FormGroup>
-                );
-              })}
+                      <Label
+                        check
+                        className="form-check-label"
+                        style={cursorStyle}
+                        onClick={() => {
+                          const event = {
+                            target: {
+                              type: 'checkbox',
+                              name: name,
+                              checked: !isChecked
+                            }
+                          };
+
+                          onSelect(event);
+                        }}
+                      >
+                        <i
+                          style={{ width: '30px' }}
+                          className={`flag-icon flag-icon-${flag} mr-1`}
+                        />
+                        {label}
+                      </Label>
+                    </FormGroup>
+                  );
+                })}
+              </div>
             </div>
           </CardBody>
         </Collapse>

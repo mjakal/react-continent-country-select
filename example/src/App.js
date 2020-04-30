@@ -45,7 +45,7 @@ const App = () => {
         </CardBody>
         <CardFooter>
           <Button color="primary" size="lg" block onClick={onSerializeData}>
-            Serialize Data
+            Show Selected Countries
           </Button>
         </CardFooter>
       </Card>
