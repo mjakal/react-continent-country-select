@@ -35,3 +35,7 @@
   padding: 0;
   overflow-y: auto;
 }
+
+.mouse_cursor {
+  cursor: pointer;
+}

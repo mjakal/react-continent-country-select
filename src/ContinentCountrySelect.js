@@ -7,17 +7,13 @@ import ContinentCountries from './ContinentCountries';
 const propTypes = {
   continents: PropTypes.array.isRequired,
   selected: PropTypes.object,
+  toggleContinent: PropTypes.object,
   onChange: PropTypes.func.isRequired
 };
 
 const defaultProps = {
-  selected: {}
-};
-
-const ContinentCountrySelect = props => {
-  const { continents, selected, onChange } = props;
-  const [query, setQueryState] = useState('');
-  const [activeItems, setActiveItemState] = useState({
+  selected: {},
+  toggleContinent: {
     AF: false,
     AN: false,
     AS: false,
@@ -25,12 +21,23 @@ const ContinentCountrySelect = props => {
     EU: false,
     NA: false,
     SA: false
-  });
+  }
+};
+
+const ContinentCountrySelect = ({
+  continents,
+  selected,
+  toggleContinent,
+  onChange
+}) => {
+  const [query, setQueryState] = useState('');
+  const [activeItems, setActiveItemState] = useState({ ...toggleContinent });
 
   const onContinentChange = item => {
-    activeItems[item] = !activeItems[item];
-
-    setActiveItemState({ ...activeItems });
+    setActiveItemState(prevState => ({
+      ...prevState,
+      [item]: !prevState[item]
+    }));
   };
 
   const onSearch = event => {
@@ -105,6 +112,7 @@ const ContinentCountrySelect = props => {
       <ContinentCountries
         styles={styles}
         continents={continents}
+        selectedCount={{}}
         selected={selected}
         query={query}
         activeItems={activeItems}

@@ -14,6 +14,7 @@ import {
 const propTypes = {
   styles: PropTypes.object.isRequired,
   continents: PropTypes.array.isRequired,
+  selectedCount: PropTypes.object.isRequired,
   selected: PropTypes.object.isRequired,
   query: PropTypes.string.isRequired,
   activeItems: PropTypes.object.isRequired,
@@ -22,141 +23,157 @@ const propTypes = {
   onSelectAll: PropTypes.func.isRequired
 };
 
-const cursorStyle = { cursor: 'pointer' };
-
-const ContinentCountries = props => {
-  const {
-    styles,
-    continents,
-    selected,
-    query,
-    activeItems,
-    onSelect,
-    onContinentChange,
-    onSelectAll
-  } = props;
+const ContinentCountries = ({
+  styles,
+  continents,
+  selectedCount,
+  selected,
+  query,
+  activeItems,
+  onSelect,
+  onContinentChange,
+  onSelectAll
+}) => {
   const userQuery = query.trim().toLowerCase();
-  const continentsCount = continents.length - 1;
-  const shouldFilter = userQuery.length >= 3 && query.length <= 20;
-  let allCountries = 0;
+  const continentsCount = continents.length;
+  const shouldFilter = userQuery.length >= 3 && userQuery.length <= 20;
 
-  return continents.map((continent, index) => {
-    let filtered = continent.countries;
+  const renderCountry = (country, shouldRender) => {
+    // Check if component should render
+    if (!shouldRender) return null;
 
-    // Filter country names
-    if (shouldFilter) {
-      filtered = continent.countries.filter(country => {
-        return country.name.toLowerCase().indexOf(userQuery) !== -1;
-      });
-    }
-
-    const filterSelected = filtered.filter(c => selected[c.code] === true);
-    const selectedCountries = filterSelected.length;
-    const totalCount = filtered.length;
-    const selectedState = selectedCountries !== totalCount;
-
-    allCountries = allCountries + totalCount;
-
-    // Return no countries message
-    if (index === continentsCount && !allCountries) {
-      return (
-        <Card className="mb-2">
-          <CardHeader className={styles.collapse_header}>
-            No countries found.
-          </CardHeader>
-        </Card>
-      );
-    }
-
-    // Hide continent if there are no countries
-    if (!totalCount) return null;
+    const countryCode = country.code;
+    const isChecked = !!selected[country.code];
+    const label = (
+      <span>
+        <i
+          style={{ width: '30px' }}
+          className={`flag-icon flag-icon-${countryCode.toLowerCase()} mr-1`}
+        />{' '}
+        `${country.name} (+$
+        {country.dial_code})`
+      </span>
+    );
 
     return (
-      <Card key={continent.code} className="mb-2">
-        <CardHeader className={styles.collapse_header}>
-          <div className={styles.title}>
-            <Input
-              type="checkbox"
-              className="form-check-input"
-              style={cursorStyle}
-              name={continent.code}
-              value={selectedState}
-              onChange={() => onSelectAll(continent.code, selectedState)}
-              checked={!selectedState}
-            />
-            <Label check className="form-check-label">
-              {`${continent.name} (${selectedCountries}/${totalCount})`}
-            </Label>
-          </div>
-          <div className={styles.actions}>
-            <Button
-              color="primary"
-              onClick={() => onContinentChange(continent.code)}
-            >
-              <i
-                className={
-                  activeItems[continent.code]
-                    ? 'fa fa-angle-double-up'
-                    : 'fa fa-angle-double-down'
-                }
-              />{' '}
-              Toggle
-            </Button>
-          </div>
-        </CardHeader>
-        <Collapse isOpen={activeItems[continent.code]}>
-          <CardBody>
-            <div className={styles.countries_container}>
-              <div className={styles.block}>
-                {filtered.map(country => {
-                  const isChecked = !!selected[country.code];
-                  const name = country.code;
-                  const label = `${country.name} (+${country.dial_code})`;
-                  const flag = country.code.toLowerCase();
+      <FormGroup check className="checkbox">
+        <Input
+          type="checkbox"
+          className={`${styles.mouse_cursor} form-check-input`}
+          name={countryCode}
+          value={isChecked}
+          onChange={onSelect}
+          checked={isChecked}
+        />
+        <Label check className="form-check-label">
+          {label}
+        </Label>
+      </FormGroup>
+    );
+  };
 
-                  return (
-                    <FormGroup key={country.code} check className="checkbox">
-                      <Input
-                        type="checkbox"
-                        className="form-check-input"
-                        style={cursorStyle}
-                        name={name}
-                        value={isChecked}
-                        onChange={onSelect}
-                        checked={isChecked}
-                      />
-                      <Label
-                        check
-                        className="form-check-label"
-                        style={cursorStyle}
-                        onClick={() => {
-                          const event = {
-                            target: {
-                              type: 'checkbox',
-                              name: name,
-                              checked: !isChecked
-                            }
-                          };
+  const renderContinentCountries = () => {
+    const continentCountries = [];
 
-                          onSelect(event);
-                        }}
-                      >
-                        <i
-                          style={{ width: '30px' }}
-                          className={`flag-icon flag-icon-${flag} mr-1`}
-                        />
-                        {label}
-                      </Label>
-                    </FormGroup>
-                  );
-                })}
+    // Outer loop to create parent
+    for (let index = 0; index < continentsCount; index++) {
+      const continent = continents[index];
+      const shouldRender = activeItems[continent.code];
+      const countries = [];
+      const countriesCount = continent.countries.length;
+      let selectedCountries = 0;
+      let filteredCountries = 0;
+
+      for (
+        let countryIndex = 0;
+        countryIndex < countriesCount;
+        countryIndex++
+      ) {
+        const country = continent.countries[countryIndex];
+
+        // Count selected countries
+        if (selected[country.code]) selectedCountries += 1;
+
+        if (shouldFilter) {
+          const countryName = country.name.toLowerCase();
+
+          if (countryName.indexOf(userQuery) !== -1) {
+            countries.push(
+              <div key={country.code}>
+                {renderCountry(country, shouldRender)}
               </div>
-            </div>
-          </CardBody>
-        </Collapse>
+            );
+
+            filteredCountries += 1;
+          }
+        } else {
+          countries.push(
+            <div key={country.code}>{renderCountry(country, shouldRender)}</div>
+          );
+
+          filteredCountries += 1;
+        }
+      }
+
+      const selectedState = selectedCountries !== countriesCount;
+
+      // Check it there are countries after filtering
+      if (filteredCountries) {
+        const iconClass = shouldRender
+          ? 'fa fa-angle-double-up'
+          : 'fa fa-angle-double-down';
+
+        continentCountries.push(
+          <Card key={continent.code} className="mb-2">
+            <CardHeader className={styles.collapse_header}>
+              <div className={styles.title}>
+                <Input
+                  type="checkbox"
+                  className={`${styles.mouse_cursor} form-check-input`}
+                  name={continent.code}
+                  value={selectedState}
+                  onChange={() => onSelectAll(continent.code, selectedState)}
+                  checked={!selectedState}
+                />
+                <Label check className="form-check-label">
+                  {`${continent.name} (${selectedCountries}/${countriesCount})`}
+                </Label>
+              </div>
+              <div className={styles.actions}>
+                <Button
+                  color="primary"
+                  onClick={() => onContinentChange(continent.code)}
+                >
+                  <i className={`${iconClass} mr-1`} />
+                  Toggle
+                </Button>
+              </div>
+            </CardHeader>
+            <Collapse isOpen={shouldRender}>
+              <CardBody>
+                <div className={styles.countries_container}>
+                  <div className={styles.block}>{countries}</div>
+                </div>
+              </CardBody>
+            </Collapse>
+          </Card>
+        );
+      }
+    }
+
+    // Check if there are any continents/countries after filtering
+    if (continentCountries.length) return continentCountries;
+
+    return (
+      <Card className="mb-2">
+        <CardHeader className={styles.collapse_header}>
+          No countries found.
+        </CardHeader>
       </Card>
     );
-  });
+  };
+
+  return <div>{renderContinentCountries()}</div>;
 };
 
 ContinentCountries.propTypes = propTypes;
