@@ -42,7 +42,7 @@ const ContinentCountries = ({
 
   const renderCountry = (country, shouldFilter, searchQuery, shouldRender) => {
     // Check if component should render
-    if (!shouldRender) return null;
+    if (!shouldRender && !shouldFilter) return null;
 
     if (shouldFilter) {
       const countryName = country.name.toLowerCase();

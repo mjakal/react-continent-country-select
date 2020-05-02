@@ -62,15 +62,13 @@ const Continent = ({
           </Label>
         </div>
         <div className={styles.actions}>
-          {!filtering && (
-            <Button
-              color="primary"
-              onClick={() => onContinentChange(continent.code)}
-            >
-              <i className={`${iconClass} mr-1`} />
-              Toggle
-            </Button>
-          )}
+          <Button
+            color="primary"
+            onClick={() => onContinentChange(continent.code)}
+          >
+            <i className={`${iconClass} mr-1`} />
+            Toggle
+          </Button>
         </div>
       </CardHeader>
       <Collapse isOpen={shouldRenderCountry}>
