@@ -18,6 +18,23 @@ const App = () => {
     ...deserializedCountries
   });
 
+  /*
+  const CountryComponent = ({ country }) => {
+    const code = country.code.toLowerCase();
+    const label = `${country.name} (+${country.dial_code})`;
+
+    return (
+      <span>
+        <i
+          style={{ width: '30px' }}
+          className={`flag-icon flag-icon-${code} mr-1`}
+        />
+        {label}
+      </span>
+    );
+  };
+  */
+
   const onChange = selected => setSelectedCountries({ ...selected });
 
   const onSerializeData = () => {
@@ -39,6 +56,7 @@ const App = () => {
         <CardBody>
           <ContinentCountrySelect
             continents={continents}
+            // customComponent={CountryComponent}
             selected={selectedCountries}
             onChange={onChange}
           />

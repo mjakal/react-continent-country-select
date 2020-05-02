@@ -18,7 +18,8 @@ const propTypes = {
   selectedCountries: PropTypes.number.isRequired,
   countriesCount: PropTypes.number.isRequired,
   shouldRenderCountry: PropTypes.bool.isRequired,
-  countries: PropTypes.any.isRequired,
+  countries: PropTypes.array.isRequired,
+  translations: PropTypes.object.isRequired,
   onSelectAll: PropTypes.func.isRequired,
   onContinentChange: PropTypes.func.isRequired
 };
@@ -32,13 +33,12 @@ const Continent = ({
   countriesCount,
   shouldRenderCountry,
   countries,
+  translations,
   onSelectAll,
   onContinentChange
 }) => {
   // Checkbox class
-  const inputClass = !filtering
-    ? `${styles.mouse_cursor} form-check-input`
-    : 'form-check-input';
+  const inputClass = !filtering ? styles.mouse_cursor : '';
   // Toggle button icon
   const iconClass = shouldRenderCountry
     ? 'fa fa-angle-double-up'
@@ -50,7 +50,7 @@ const Continent = ({
         <div className={styles.title}>
           <Input
             type="checkbox"
-            className={inputClass}
+            className={`${inputClass} form-check-input`}
             name={continent.code}
             value={selectedState}
             onChange={() => onSelectAll(continent.code, selectedState)}
@@ -67,7 +67,7 @@ const Continent = ({
             onClick={() => onContinentChange(continent.code)}
           >
             <i className={`${iconClass} mr-1`} />
-            Toggle
+            {translations.toggleText}
           </Button>
         </div>
       </CardHeader>

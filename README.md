@@ -24,7 +24,7 @@ npm install --save react-continent-country-select
 ## Usage
 
 ```jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   ContinentCountrySelect,
   deserializeCountries,
@@ -35,17 +35,29 @@ import continents from 'react-continent-country-select/dist/continent_countries.
 
 // pre-selected values from e.g. API endpoint
 const countries = ['be', 'nl', 'hr'];
+// Deserialize data: convert ['be', 'nl', 'hr'] to { BE: true, NL: true, HR: true }
+const deserializedCountries = deserializeCountries(countries);
 
 const App = () => {
-  const [selectedCountries, setSelectedCountries] = useState({});
+  const [selectedCountries, setSelectedCountries] = useState({
+    ...deserializedCountries
+  });
 
-  // If you are using class components, put this code inside componentDidMount()
-  useEffect(() => {
-    // Deserialize data: convert ['be', 'nl', 'hr'] to { BE: true, NL: true, HR: true }
-    const deserializedCountries = deserializeCountries(countries);
+  // You can create custom country component
+  const CountryComponent = ({ country }) => {
+    const code = country.code.toLowerCase();
+    const label = `${country.name} (+${country.dial_code})`;
 
-    setSelectedCountries({ ...deserializedCountries });
-  }, []);
+    return (
+      <span>
+        <i
+          style={{ width: '30px' }}
+          className={`flag-icon flag-icon-${code} mr-1`}
+        />
+        {label}
+      </span>
+    );
+  };
 
   const onChange = selected => setSelectedCountries({ ...selected });
 
@@ -60,9 +72,23 @@ const App = () => {
   return (
     <div>
       <ContinentCountrySelect
-        continents={continents}
-        selected={selectedCountries}
-        onChange={onChange}
+        continents={continents} // Required
+        selected={selectedCountries} // Required
+        toggleContinent={{
+          AF: false,
+          AN: false,
+          AS: false,
+          OC: false,
+          EU: true,
+          NA: false,
+          SA: false
+        }} // Not required - by default everything is set to false
+        translations={{
+          toggleText: 'Toggle',
+          notFoundText: 'No countries found.'
+        }} // Not required
+        customComponent={CountryComponent} // Not required
+        onChange={onChange} // Required
       />
       <button type="button" onClick={onSerializeData}>
         Serialize Selected Countries

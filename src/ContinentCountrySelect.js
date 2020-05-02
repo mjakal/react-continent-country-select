@@ -8,6 +8,9 @@ const propTypes = {
   continents: PropTypes.array.isRequired,
   selected: PropTypes.object,
   toggleContinent: PropTypes.object,
+  options: PropTypes.object,
+  translations: PropTypes.object,
+  customComponent: PropTypes.func,
   onChange: PropTypes.func.isRequired
 };
 
@@ -21,13 +24,20 @@ const defaultProps = {
     EU: false,
     NA: false,
     SA: false
-  }
+  },
+  translations: {
+    toggleText: 'Toggle',
+    notFoundText: 'No countries found.'
+  },
+  customComponent: null
 };
 
 const ContinentCountrySelect = ({
   continents,
   selected,
   toggleContinent,
+  translations,
+  customComponent,
   onChange
 }) => {
   const [query, setQueryState] = useState('');
@@ -116,6 +126,8 @@ const ContinentCountrySelect = ({
         selected={selected}
         query={query}
         activeItems={activeItems}
+        translations={translations}
+        customComponent={customComponent}
         onSelect={onSelect}
         onContinentChange={onContinentChange}
         onSelectAll={onSelectAll}
